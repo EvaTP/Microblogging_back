@@ -24,19 +24,21 @@ INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, upda
 
 
 
-INSERT INTO reactions (comments, ilike, user_id, post_id) VALUES
-('Magnifique photo, ça donne envie de voyager !', 3, 2, 1),
-('J''y étais aussi l''an dernier, magique !', 2, 3, 2),
-('La route 66 en van, quel rêve !', 5, 1, 3),
-('Chefchaouen est sur ma bucket list 🔵', 1, 2, 4),
-('Wow, ces lions sont impressionnants !', 4, 3, 5),
-('Incroyable, quelle vue depuis le sommet !', 2, 1, 6),
-('Tokyo est vraiment une ville unique ✨', 3, 2, 7),
-('Le paradis existe vraiment 🏝️', 5, 3, 8),
-('Tellement chargé d''histoire… merci du partage 🙏', 2, 1, 9),
-('Les aurores boréales sont sur ma liste depuis toujours ! 💚', 4, 2, 10);
+INSERT INTO comments (comment, user_id, post_id) VALUES
+('Magnifique photo, ça donne envie de voyager !', 2, 1),
+('J''y étais aussi l''an dernier, magique !', 3, 2),
+('La route 66 en van, quel rêve !', 1, 3),
+('Chefchaouen est sur ma bucket list 🔵', 2, 4),
+('Wow, ces lions sont impressionnants !', 3, 5),
+('Incroyable, quelle vue depuis le sommet !', 1, 6),
+('Tokyo est vraiment une ville unique ✨', 2, 7),
+('Le paradis existe vraiment 🏝️', 3, 8),
+('Tellement chargé d''histoire… merci du partage 🙏', 1, 9),
+('Les aurores boréales sont sur ma liste depuis toujours ! 💚', 2, 10);
 
-
-
-
-
+INSERT INTO likes (user_id, post_id) VALUES
+(1, 7),
+(2, 4),
+(3, 5),
+(1, 6),
+(2, 2);

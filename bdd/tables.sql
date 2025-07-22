@@ -28,25 +28,22 @@ CREATE TABLE posts (
 CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
 )
 
-CREATE TABLE reactions(
+CREATE TABLE comments (
  "id" SERIAL PRIMARY KEY,
- "comments" TEXT,
- "like" INT,
+ "comment" TEXT NO NULL,
  "user_id" INT NOT NULL,
  "post_id" INT NOT NULL,
-CONSTRAINT fk_reaction FOREIGN KEY (user_id) REFERENCES users(id),
-CONSTRAINT fk_reaction_post FOREIGN KEY (post_id) REFERENCES posts (id)
+CONSTRAINT fk_comments FOREIGN KEY (user_id) REFERENCES users(id),
+CONSTRAINT fk_comments_post FOREIGN KEY (post_id) REFERENCES posts(id)
 )
 
-DROP TABLE IF EXISTS reactions;
--- correction de la table reactions car "like" est un mot-clé réservé dans PostgreSQL et ne peut pas être utilisé (remplacé par ilike)
-CREATE TABLE reactions(
+CREATE TABLE likes (
  "id" SERIAL PRIMARY KEY,
- "comments" TEXT,
- "like" INT,
  "user_id" INT NOT NULL,
  "post_id" INT NOT NULL,
-CONSTRAINT fk_reaction FOREIGN KEY (user_id) REFERENCES users(id),
-CONSTRAINT fk_reaction_post FOREIGN KEY (post_id) REFERENCES posts (id)
+CONSTRAINT fk_likes FOREIGN KEY (user_id) REFERENCES users(id),
+CONSTRAINT fk_likes_post FOREIGN KEY (post_id) REFERENCES posts(id)
 )
+
+
 
