@@ -9,24 +9,15 @@ datasource db {
 }
 
 model posts {
-  id           Int         @id(map: "products_pkey") @default(autoincrement())
+  id           Int        @id(map: "products_pkey") @default(autoincrement())
   description  String?
   url_pictures String?
   user_id      BigInt?
   hashtag      String?
-  created_at   DateTime?   @db.Date
-  updated_at   DateTime?   @db.Date
-  reactions    reactions[]
-}
-
-model reactions {
-  id       Int     @id @default(autoincrement())
-  comments String?
-  jelike   Int?
-  user_id  Int
-  post_id  Int
-  users    users   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_reaction")
-  posts    posts   @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_reaction_post")
+  created_at   DateTime?  @db.Date
+  updated_at   DateTime?  @db.Date
+  comments     comments[]
+  likes        likes[]
 }
 
 model status {
@@ -37,15 +28,33 @@ model status {
 }
 
 model users {
-  id             Int         @id @default(autoincrement())
+  id             Int        @id @default(autoincrement())
   firstname      String
   lastname       String
   email          String
   password       String
   status_id      String
   user_biography String?
-  created_at     DateTime    @default(now()) @db.Timestamp(6)
-  updated_at     DateTime    @default(now()) @db.Timestamp(6)
-  reactions      reactions[]
+  created_at     DateTime   @default(now()) @db.Timestamp(6)
+  updated_at     DateTime   @default(now()) @db.Timestamp(6)
+  comments       comments[]
+  likes          likes[]
   status         status[]
+}
+
+model comments {
+  id      Int    @id @default(autoincrement())
+  comment String
+  user_id Int
+  post_id Int
+  users   users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments")
+  posts   posts  @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_post")
+}
+
+model likes {
+  id      Int   @id @default(autoincrement())
+  user_id Int
+  post_id Int
+  users   users @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes")
+  posts   posts @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes_post")
 }
