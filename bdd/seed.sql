@@ -1,3 +1,8 @@
+INSERT INTO status (role)
+VALUES
+('admin'),
+('user');
+
 INSERT INTO users (firstname, lastname, email, password, status_id, user_biography)
 VALUES 
   ('Eva', 'Tharrats', 'eva@travelers.com', 'mdpHashEva', 2, 'J’adore les volcans d’Islande.'),
