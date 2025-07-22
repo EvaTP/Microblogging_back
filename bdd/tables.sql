@@ -1,6 +1,7 @@
 CREATE TABLE status(
 "id" SERIAL PRIMARY KEY,
-"role" TEXT
+"role" TEXT,
+role_id INTEGER,
 CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES users(id)
 )
 
@@ -23,7 +24,7 @@ CREATE TABLE posts (
 "hashtags" TEXT,
 "user_id" INT,
 "created_at" timestamp NOT NULL DEFAULT (now()),
-"updated_at" timestamp NOT NULL DEFAULT (now())
+"updated_at" timestamp NOT NULL DEFAULT (now()),
 CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
 )
 
