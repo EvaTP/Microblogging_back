@@ -21,22 +21,3 @@ INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, upda
 ('Journée détente sur une plage des Maldives 🏝️', 'https://picsum.photos/id/208/600/400', 2, '#maldives #beachlife #paradise', '2025-07-08', '2025-07-08'),
 ('Découverte des temples d’Angkor Wat 🛕', 'https://picsum.photos/id/209/600/400', 3, '#cambodia #angkorwat #culture', '2025-07-09', '2025-07-09'),
 ('Escapade en Laponie – aurores boréales 💚', 'https://picsum.photos/id/210/600/400', 1, '#lapland #northernlights #snow', '2025-07-10', '2025-07-10');
-
-
-
-INSERT INTO reactions (comments, ilike, user_id, post_id) VALUES
-('Magnifique photo, ça donne envie de voyager !', 3, 2, 1),
-('J''y étais aussi l''an dernier, magique !', 2, 3, 2),
-('La route 66 en van, quel rêve !', 5, 1, 3),
-('Chefchaouen est sur ma bucket list 🔵', 1, 2, 4),
-('Wow, ces lions sont impressionnants !', 4, 3, 5),
-('Incroyable, quelle vue depuis le sommet !', 2, 1, 6),
-('Tokyo est vraiment une ville unique ✨', 3, 2, 7),
-('Le paradis existe vraiment 🏝️', 5, 3, 8),
-('Tellement chargé d''histoire… merci du partage 🙏', 2, 1, 9),
-('Les aurores boréales sont sur ma liste depuis toujours ! 💚', 4, 2, 10);
-
-
-
-
-
