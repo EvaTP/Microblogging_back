@@ -26,6 +26,12 @@ yarn-error.log*
 .env*.local
 .env
 
+# Ignorer tous les fichiers .log à la racine et dans les sous-dossiers
+*.log
+
+# Ignorer un dossier de logs (optionnel, si tu en as un)
+logs/
+
 # vercel
 .vercel
 

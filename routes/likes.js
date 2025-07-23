@@ -72,7 +72,7 @@ router.patch("/:id", async (req, res) => {
     return res.status(400).json({ error: "ID invalide" });
   }
 
-  const { role, role_id } = req.body;
+  const { user_id, post_id } = req.body;
 
   try {
     // Vérifie que l'élément existe
@@ -121,7 +121,7 @@ router.delete("/:id", async (req, res) => {
     }
 
     // Supprime l'élément
-    await prisma.status.delete({
+    await prisma.likes.delete({
       where: { id },
     });
 
