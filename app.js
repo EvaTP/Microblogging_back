@@ -7,11 +7,13 @@ app.use(cors());
 app.use(express.json());
 
 const statusRoutes = require("./routes/status");
-app.use("/routes/status", statusRoutes);
+app.use("/status", statusRoutes);
 
-app.get("/routes/status/test2", (req, res) => {
-  res.send("test direct depuis app.js");
-});
+const commentRoutes = require("./routes/comments");
+app.use("/comments", commentRoutes);
+
+const likesRoutes = require("./routes/likes");
+app.use("/likes", likesRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello Microblog!");

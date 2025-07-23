@@ -12,7 +12,7 @@ model posts {
   id           Int        @id(map: "products_pkey") @default(autoincrement())
   description  String?
   url_pictures String?
-  user_id      BigInt?
+  user_id      Int?
   hashtag      String?
   created_at   DateTime?  @db.Date
   updated_at   DateTime?  @db.Date
