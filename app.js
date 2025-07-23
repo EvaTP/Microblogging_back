@@ -1,7 +1,15 @@
 const express = require("express");
 const app = express();
+
 const postsRouter =require('./routes/posts')
 const cors = require('cors');
+const usersRouter = require("./routes/users"); // 🔹 Router des users
+
+app.use(express.json()); // Obligatoire pour que req.body fonctionne !
+
+
+app.use("/users", usersRouter); // Tous les appels à /users vont dans routes/users.js
+
 
 
 app.get("/", (req, res) => {
