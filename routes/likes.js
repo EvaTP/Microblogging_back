@@ -44,62 +44,63 @@ router.get("/:id", async (req, res) => {
 // POST
 router.post("/", async (req, res) => {
   const { user_id, post_id } = req.body;
- if (!user_id || !post_id) {
+  if (!user_id || !post_id) {
     return res.status(400).json({
       error: "Les champs 'user_id' et 'post_id' sont requis.",
     });
+  }
   try {
-    const newStatus = await prisma.status.create({
+    const newLike = await prisma.likes.create({
       data: {
-        role,
-        role_id: role_id ?? null,
+        user_id,
+        post_id,
       },
     });
 
-    res.status(201).json(newStatus);
+    res.status(201).json(newLike);
   } catch (error) {
-    console.error("Erreur POST /status:", error);
-    res.status(500).json({ error: "Erreur lors de la création du status" });
+    console.error("Erreur POST /likes:", error);
+    res.status(500).json({ error: "Erreur lors de la création du like" });
   }
 });
 
 // PATCH
-// router.patch("/:id", async (req, res) => {
-//   const id = parseInt(req.params.id);
+router.patch("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
 
-//   if (isNaN(id)) {
-//     return res.status(400).json({ error: "ID invalide" });
-//   }
+  if (isNaN(id)) {
+    return res.status(400).json({ error: "ID invalide" });
+  }
 
-//   const { role, role_id } = req.body;
+  const { role, role_id } = req.body;
 
-//   try {
-//     // Vérifie que l'élément existe
-//     const statusToUpdate = await prisma.status.findUnique({
-//       where: { id },
-//     });
+  try {
+    // Vérifie que l'élément existe
+    const likeToUpdate = await prisma.likes.findUnique({
+      where: { id },
+    });
 
-//     if (!statusToUpdate) {
-//       return res.status(404).json({ error: "Statut non trouvé" });
-//     }
+    if (!likeToUpdate) {
+      return res.status(404).json({ error: "Like non trouvé" });
+    }
 
-//     const updatedStatus = await prisma.status.update({
-//       where: { id },
-//       data: {
-//         role: role ?? statusToUpdate.role,
-//         role_id: role_id !== undefined ? role_id : statusToUpdate.role_id,
-//       },
-//     });
+    const updatedLike = await prisma.likes.update({
+      where: { id },
+      data: {
+        user_id,
+        post_id,
+      },
+    });
 
-//     res.status(200).json({
-//       message: `Statut avec l'ID ${id} mis à jour.`,
-//       updated: updatedStatus,
-//     });
-//   } catch (error) {
-//     console.error("Erreur PATCH /routes/status/:id", error);
-//     res.status(500).json({ error: "Erreur serveur" });
-//   }
-// });
+    res.status(200).json({
+      message: `Like avec l'ID ${id} mis à jour.`,
+      updated: updatedLike,
+    });
+  } catch (error) {
+    console.error("Erreur PATCH /routes/likes/:id", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
 // DELETE
 router.delete("/:id", async (req, res) => {
