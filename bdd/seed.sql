@@ -22,6 +22,8 @@ INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, upda
 ('Découverte des temples d’Angkor Wat 🛕', 'https://picsum.photos/id/209/600/400', 3, '#cambodia #angkorwat #culture', '2025-07-09', '2025-07-09'),
 ('Escapade en Laponie – aurores boréales 💚', 'https://picsum.photos/id/210/600/400', 1, '#lapland #northernlights #snow', '2025-07-10', '2025-07-10');
 
+INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, updated_at) VALUES
+('Marche au sommet de la Grande Muraille de Chine 🏯 – Un voyage dans l’histoire !', 'https://upload.wikimedia.org/wikipedia/commons/1/10/20090529_Great_Wall_8185.jpg', 6, '#chine #grandeMuraille #patrimoineMondial', '2025-07-11', '2025-07-11');
 
 
 INSERT INTO comments (comment, user_id, post_id) VALUES
