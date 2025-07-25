@@ -16,7 +16,7 @@ model posts {
   hashtag      String?
   created_at   DateTime?  @db.Date
   updated_at   DateTime?  @db.Date
-  comments     comments[]
+  comments     comments[] 
   likes        likes[]
 }
 

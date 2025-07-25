@@ -1,31 +1,29 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
+const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+// Routes
 const statusRoutes = require("./routes/status");
-app.use("/status", statusRoutes);
-
 const commentRoutes = require("./routes/comments");
-app.use("/comments", commentRoutes);
-
 const likesRoutes = require("./routes/likes");
-app.use("/likes", likesRoutes);
-
 const postsRouter = require("./routes/posts");
-const usersRouter = require("./routes/users"); // 🔹 Router des users
+const usersRouter = require("./routes/users");
+const registerRoute = require("./routes/register");
 
-app.use(express.json()); // Obligatoire pour que req.body fonctionne !
-
-app.use("/users", usersRouter); // Tous les appels à /users vont dans routes/users.js
+app.use("/status", statusRoutes);
+app.use("/comments", commentRoutes);
+app.use("/likes", likesRoutes);
+app.use("/posts", postsRouter);
+app.use("/users", usersRouter);
+app.use("/register", registerRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello Microblog!");
 });
-app.use(express.json());
 
 //const postsRouter =require('./routes/posts')
 app.use("/posts", postsRouter);
