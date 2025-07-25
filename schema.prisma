@@ -30,15 +30,16 @@ model likes {
 }
 
 model posts {
-  id           Int        @id(map: "products_pkey") @default(autoincrement())
-  description  String?
-  url_pictures String?
-  user_id      Int?
-  hashtag      String?
-  created_at   DateTime?  @db.Date
-  updated_at   DateTime?  @db.Date
-  comments     comments[]
-  likes        likes[]
+  id            Int             @id(map: "products_pkey") @default(autoincrement())
+  description   String?
+  url_pictures  String?
+  user_id       Int?
+  hashtag       String?
+  created_at    DateTime?       @db.Date
+  updated_at    DateTime?       @db.Date
+  comments      comments[]
+  likes         likes[]
+  posts_hastags posts_hastags[]
 }
 
 model posts_hastags {
@@ -87,12 +88,15 @@ model likes {
 }
 
 model hashtags {
-  id    Int     @id @default(autoincrement())
-  label String?
+  id            Int             @id @default(autoincrement())
+  label         String?
+  posts_hastags posts_hastags[]
 }
 
 model posts_hastags {
-  id          Int     @id @default(autoincrement())
-  id_posts    String?
-  id_hashtags String?
+  id          Int       @id @default(autoincrement())
+  id_posts    Int?
+  id_hashtags Int?
+  posts       posts?    @relation(fields: [id_posts], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "constraint_1")
+  hashtags    hashtags? @relation(fields: [id_hashtags], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_posts_hashtags_hashtag")
 }
