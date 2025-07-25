@@ -25,9 +25,13 @@ app.get("/", (req, res) => {
   res.send("Hello Microblog!");
 });
 
+<<<<<<< HEAD
 //const postsRouter =require('./routes/posts')
 app.use("/posts", postsRouter);
 const PORT = 3001;
+=======
+const PORT = 5000;
+>>>>>>> ff2e355 (signup form)
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -68,3 +68,31 @@ model users {
   likes          likes[]
   status         status[]
 }
+
+model comments {
+  id      Int    @id @default(autoincrement())
+  comment String
+  user_id Int
+  post_id Int
+  users   users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments")
+  posts   posts  @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_post")
+}
+
+model likes {
+  id      Int   @id @default(autoincrement())
+  user_id Int
+  post_id Int
+  users   users @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes")
+  posts   posts @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes_post")
+}
+
+model hashtags {
+  id    Int     @id @default(autoincrement())
+  label String?
+}
+
+model posts_hastags {
+  id          Int     @id @default(autoincrement())
+  id_posts    String?
+  id_hashtags String?
+}

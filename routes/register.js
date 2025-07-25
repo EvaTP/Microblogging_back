@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    // // Vérifie si un utilisateur avec le même email existe déjà
+    // Vérifie si un utilisateur avec le même email existe déjà
     // const existingUser = await prisma.users.findUnique({
     //   where: { email },
     // });
