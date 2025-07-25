@@ -1,11 +1,32 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model comments {
+  id      Int    @id @default(autoincrement())
+  comment String
+  user_id Int
+  post_id Int
+  users   users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments")
+  posts   posts  @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_post")
+}
+
+model hashtags {
+  id    Int     @id @default(autoincrement())
+  label String?
+}
+
+model likes {
+  id      Int   @id @default(autoincrement())
+  user_id Int
+  post_id Int
+  users   users @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes")
+  posts   posts @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes_post")
 }
 
 model posts {
@@ -16,8 +37,14 @@ model posts {
   hashtag      String?
   created_at   DateTime?  @db.Date
   updated_at   DateTime?  @db.Date
-  comments     comments[] 
+  comments     comments[]
   likes        likes[]
+}
+
+model posts_hastags {
+  id          Int     @id @default(autoincrement())
+  id_posts    String?
+  id_hashtags String?
 }
 
 model status {
@@ -40,21 +67,4 @@ model users {
   comments       comments[]
   likes          likes[]
   status         status[]
-}
-
-model comments {
-  id      Int    @id @default(autoincrement())
-  comment String
-  user_id Int
-  post_id Int
-  users   users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments")
-  posts   posts  @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_post")
-}
-
-model likes {
-  id      Int   @id @default(autoincrement())
-  user_id Int
-  post_id Int
-  users   users @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes")
-  posts   posts @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_likes_post")
 }
