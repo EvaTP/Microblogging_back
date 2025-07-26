@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
     if (!hashtags) {
       return res.status(404).json({ error: "Hashtag non trouvé" });
     }
-    res.json(comments);
+    res.json(hashtags);
   } catch (error) {
     console.error("Erreur GET /hashtag/:id", error);
     res.status(500).json({ error: "Erreur serveur" });
