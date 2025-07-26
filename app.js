@@ -13,6 +13,7 @@ const likesRoutes = require("./routes/likes");
 const postsRouter = require("./routes/posts");
 const usersRouter = require("./routes/users");
 const registerRoute = require("./routes/register");
+const hashtagsRoute = require("./routes/hashtags");
 
 app.use("/status", statusRoutes);
 app.use("/comments", commentRoutes);
@@ -20,6 +21,7 @@ app.use("/likes", likesRoutes);
 app.use("/posts", postsRouter);
 app.use("/users", usersRouter);
 app.use("/register", registerRoute);
+app.use("/hashtags", hashtagsRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello Microblog!");
