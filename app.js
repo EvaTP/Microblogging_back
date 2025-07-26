@@ -2,8 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-// Middleware
-app.use(cors());
+// Middleware (cors configuré pour NextAuth)
+app.use(
+  cors({
+    origin: "http://localhost:3000", // URL de microblogging_front
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
