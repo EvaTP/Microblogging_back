@@ -10,6 +10,18 @@ VALUES
   ('Camille', 'Lebigot', 'camille@travelers.com', 'mdpHashCamille', 1, 'En quête du plus beau coucher de soleil 🌅.');
 
 
+-- nouvelle insertion de users après avoir ajouté le champ url_userpicture
+INSERT INTO users (firstname, lastname, email, password, status_id, user_biography, url_userpicture)
+VALUES 
+  ('Lina', 'Moreau', 'lina@gmail.com', 'mdpHashLina', 2, 'Photographe de l’extrême, toujours à l’affût de l’aurore boréale.', 'https://randomuser.me/api/portraits/women/1.jpg'),
+  ('Thomas', 'Dupuis', 'thomas@gmail.com', 'mdpHashThomas', 2, 'Road tripper invétéré 🛻.', 'https://randomuser.me/api/portraits/men/2.jpg'),
+  ('Sophie', 'Nguyen', 'sophie@gmail.com', 'mdpHashSophie', 2, 'Fan de treks et de randonnées en haute montagne.', 'https://randomuser.me/api/portraits/women/3.jpg'),
+  ('Takashi', 'Kitano', 'takashi@gmail.com', 'mdpHashTakashi', 2, 'Je suis japonais et j"ai fait l"ascension du mont Fuji dix fois !', 'https://randomuser.me/api/portraits/men/4.jpg'),
+  ('Emma', 'Martin', 'emma@gmail.com', 'mdpHashEmma', 2, 'Aventurière dans l’âme, j’ai fait le tour du monde deux fois.', 'https://randomuser.me/api/portraits/women/5.jpg');
+
+
+
+
 INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, updated_at) VALUES
 ('Coucher de soleil magique à Santorin 🌅', 'https://picsum.photos/id/201/600/400', 1, '#santorini #sunset #travel', '2025-07-01', '2025-07-01'),
 ('Rizières de Bali sous la pluie ☔️', 'https://picsum.photos/id/202/600/400', 2, '#bali #nature #wanderlust', '2025-07-02', '2025-07-02'),
@@ -44,3 +56,7 @@ INSERT INTO likes (user_id, post_id) VALUES
 (3, 5),
 (1, 6),
 (2, 2);
+
+-- ajout de l'image dans users
+ALTER TABLE users
+ADD COLUMN url_userpicture TEXT;

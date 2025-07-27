@@ -1,10 +1,10 @@
 // console.log("status.js chargé");
 
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
+const prisma = require("../lib/prisma");
 const router = express.Router();
-const prisma = new PrismaClient();
 
+// TEST
 router.get("/test", (req, res) => {
   console.log("✅ Route /status/test atteinte");
   res.send("Test route status OK");
