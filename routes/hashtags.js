@@ -1,7 +1,6 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
+const prisma = require("../lib/prisma");
 const router = express.Router();
-const prisma = new PrismaClient();
 
 // GET : TEST
 router.get("/test", (req, res) => {

@@ -1,11 +1,9 @@
 console.log("✅ Route /register chargée");
 
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
+const prisma = require("../lib/prisma");
 const bcrypt = require("bcrypt");
-
 const router = express.Router();
-const prisma = new PrismaClient();
 
 // POST : Enregistrement d'un nouvel utilisateur
 router.post("/", async (req, res) => {
