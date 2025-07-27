@@ -1,10 +1,11 @@
 // routes/auth.js
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { PrismaClient } = require("@prisma/client");
-
+const prisma = require("../lib/prisma");
 const router = express.Router();
-const prisma = new PrismaClient();
+
+console.log("✅ Route /auth chargée");
+console.log("🔍 Prisma initialisé:", prisma ? "OUI" : "NON");
 
 // Route pour l'authentification
 router.post("/login", async (req, res) => {
