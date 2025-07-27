@@ -1,8 +1,6 @@
 const express = require("express");
 const prisma = require("../lib/prisma");
 const router = express.Router();
-/////.  routes.  et en desous de ta page tu met "
-module.exports = router;
 
 // créer une route post router.get
 // router.get('/posts', async (req, res) => {
@@ -131,3 +129,5 @@ router.delete("/:id", async (req, res) => {
       .json({ error: "Erreur serveur lors de la suppression du post." });
   }
 });
+
+module.exports = router;
