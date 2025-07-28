@@ -60,3 +60,22 @@ INSERT INTO likes (user_id, post_id) VALUES
 -- ajout de l'image dans users
 ALTER TABLE users
 ADD COLUMN url_userpicture TEXT;
+
+-- supprimer les users dont le mot de passe est en clair
+DELETE FROM users
+WHERE id = 1;
+
+-- supprimer plusieurs utilisateurs
+DELETE FROM users
+WHERE id IN (1, 2, 3);
+
+-- changer le user_id dans les posts où user_id = 1
+UPDATE posts
+SET user_id = 11
+WHERE user_id = 1;
+
+-- puis les créer à nouveau
+INSERT INTO users (firstname, lastname, email, password, status_id, user_biography)
+VALUES 
+  ('Eva', 'Tharrats', 'eva@travelers.com', 'eva1234', 2, 'J’adore les volcans d’Islande.');
+
