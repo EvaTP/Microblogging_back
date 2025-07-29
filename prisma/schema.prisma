@@ -7,12 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model hashtags {
-  id            Int             @id @default(autoincrement())
-  label         String?
-  posts_hastags posts_hastags[]
-}
-
 model comments {
   id      Int    @id @default(autoincrement())
   comment String
@@ -20,6 +14,12 @@ model comments {
   post_id Int
   users   users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments")
   posts   posts  @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_post")
+}
+
+model hashtags {
+  id            Int             @id @default(autoincrement())
+  label         String?
+  posts_hastags posts_hastags[]
 }
 
 model likes {
@@ -59,16 +59,17 @@ model status {
 }
 
 model users {
-  id             Int        @id @default(autoincrement())
-  firstname      String
-  lastname       String
-  email          String
-  password       String
-  status_id      String
-  user_biography String?
-  created_at     DateTime   @default(now()) @db.Timestamp(6)
-  updated_at     DateTime   @default(now()) @db.Timestamp(6)
-  comments       comments[]
-  likes          likes[]
-  status         status[]
+  id              Int        @id @default(autoincrement())
+  firstname       String
+  lastname        String
+  email           String
+  password        String
+  status_id       String
+  user_biography  String?
+  created_at      DateTime   @default(now()) @db.Timestamp(6)
+  updated_at      DateTime   @default(now()) @db.Timestamp(6)
+  url_userpicture String?
+  comments        comments[]
+  likes           likes[]
+  status          status[]
 }

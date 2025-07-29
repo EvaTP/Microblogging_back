@@ -1,7 +1,6 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
+const prisma = require("../lib/prisma");
 const router = express.Router();
-const prisma = new PrismaClient();
 
 router.get("/test", (req, res) => {
   console.log("✅ Route /likes/test atteinte");
@@ -9,9 +8,29 @@ router.get("/test", (req, res) => {
 });
 
 // GET : TOUS LES LIKES
+// router.get("/", async (req, res) => {
+//   try {
+//     const likes = await prisma.likes.findMany();
+//     res.json(likes);
+//   } catch (error) {
+//     console.error("Erreur GET /likes:", error);
+//     res.status(500).json({ error: "Erreur serveur" });
+//   }
+// });
+
+// GET POUR COMPOSANTT LIKE
 router.get("/", async (req, res) => {
+  const { user_id, post_id } = req.query;
+
   try {
-    const likes = await prisma.likes.findMany();
+    const filters = {};
+    if (user_id) filters.user_id = parseInt(user_id);
+    if (post_id) filters.post_id = parseInt(post_id);
+
+    const likes = await prisma.likes.findMany({
+      where: filters,
+    });
+
     res.json(likes);
   } catch (error) {
     console.error("Erreur GET /likes:", error);
@@ -131,5 +150,32 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Erreur serveur lors de la suppression" });
   }
 });
+
+
+router.get("/count/:postId", async (req, res) => {
+  const postId = parseInt(req.params.postId);
+
+  if (isNaN(postId)) {
+    return res.status(400).json({ error: "postId invalide" });
+  }
+
+  try {
+    const count = await prisma.likes.count({
+      where: { post_id: postId },
+    });
+
+    res.json({ count });
+  } catch (error) {
+    console.error("Erreur GET /likes/count/:postId", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+
+
+
+
+
+
 
 module.exports = router;
