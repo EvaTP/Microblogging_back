@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
   try {
     const posts = await prisma.posts.findMany({
       include: {
-        user: {  // inclure les infos de l'utilisateur lié
+        users: {  // inclure les infos de l'utilisateur lié
           select: {
             firstname: true,
             // tu peux aussi prendre d'autres infos ici
