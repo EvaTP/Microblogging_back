@@ -20,14 +20,22 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await prisma.posts.findMany();
+    const posts = await prisma.posts.findMany({
+      include: {
+        user: {  // inclure les infos de l'utilisateur lié
+          select: {
+            firstname: true,
+            // tu peux aussi prendre d'autres infos ici
+          },
+        },
+        comments: true,
+        likes: true,
+      },
+    });
     res.json(posts);
-    // res.status(200).json(posts)
   } catch (error) {
     console.error("Erreur Prisma :", error);
-    res
-      .status(500)
-      .json({ error: "Erreur serveur lors de la récupération des posts." });
+    res.status(500).json({ error: "Erreur serveur lors de la récupération des posts." });
   }
 });
 
