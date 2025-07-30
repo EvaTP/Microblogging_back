@@ -37,6 +37,25 @@ INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, upda
 INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, updated_at) VALUES
 ('Marche au sommet de la Grande Muraille de Chine 🏯 – Un voyage dans l’histoire !', 'https://upload.wikimedia.org/wikipedia/commons/1/10/20090529_Great_Wall_8185.jpg', 6, '#chine #grandeMuraille #patrimoineMondial', '2025-07-11', '2025-07-11');
 
+INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, updated_at) VALUES
+(
+  'Traversée du désert du Sahara 🏜️ – Des dunes à perte de vue et un silence absolu.',
+  'https://upload.wikimedia.org/wikipedia/commons/9/91/Sahara_Desert_%28254866874%29.jpeg',
+  7,
+  '#sahara #désert #aventure #voyage',
+  '2025-07-11',
+  '2025-07-11'
+),
+(
+  'Aurores boréales en Islande 🌌 – Une nuit inoubliable sous les lumières polaires !',
+  'https://upload.wikimedia.org/wikipedia/commons/5/5d/Northern_Lights_over_Kirkjufell%2C_Iceland.jpg',
+  8,
+  '#islande #auroresboréales #nature #voyage',
+  '2025-07-11',
+  '2025-07-11'
+);
+
+
 
 INSERT INTO comments (comment, user_id, post_id) VALUES
 ('Magnifique photo, ça donne envie de voyager !', 2, 1),
@@ -74,8 +93,24 @@ UPDATE posts
 SET user_id = 11
 WHERE user_id = 1;
 
--- puis les créer à nouveau
+-- puis les créer à nouveau avec un lien url vers photo
 INSERT INTO users (firstname, lastname, email, password, status_id, user_biography)
 VALUES 
   ('Eva', 'Tharrats', 'eva@travelers.com', 'eva1234', 2, 'J’adore les volcans d’Islande.');
 
+
+INSERT INTO users (firstname, lastname, email, password, status_id, user_biography, url_userpicture)
+VALUES 
+  ('Eva', 'Dubois', 'eva.travelers.com', 'eva123', 1, 'J"adore les volcans et les geysers d’Islande.', 'https://randomuser.me/api/portraits/women/6.jpg'),
+  ('Marc', 'Leroy', 'marc.leroy@email.com', 'mdpHashMarc', 2, 'Développeur web le jour, randonneur le week-end. J"aime les défis !', 'https://randomuser.me/api/portraits/men/7.jpg');
+
+-- ajouter manuellement des photos
+UPDATE users 
+SET url_userpicture = 'https://randomuser.me/api/portraits/women/17.jpg'
+WHERE id = 18;
+
+-- ajout fk posts vers users
+ALTER TABLE posts
+ADD CONSTRAINT fk_user_id
+FOREIGN KEY (user_id)
+REFERENCES users(id);

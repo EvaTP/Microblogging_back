@@ -4,18 +4,18 @@ const bcrypt = require("bcrypt");
 const prisma = require("../lib/prisma");
 const router = express.Router();
 
-console.log("🔍 Import prisma:", typeof prisma);
-console.log("🔍 Prisma object:", prisma);
-console.log("✅ Route /auth chargée");
-console.log("🔍 Prisma initialisé:", prisma ? "OUI" : "NON");
+// console.log("🔍 Import prisma:", typeof prisma);
+// console.log("🔍 Prisma object:", prisma);
+// console.log("✅ Route /auth chargée");
+// console.log("🔍 Prisma initialisé:", prisma ? "OUI" : "NON");
 
 // Route pour l'authentification
 router.post("/login", async (req, res) => {
   try {
-    const { firstName, password } = req.body;
-
+    const { firstname, password } = req.body;
+    console.log(firstname, password);
     // Validation des données
-    if (!firstName || !password) {
+    if (!firstname || !password) {
       return res.status(400).json({
         message: "Prénom et mot de passe requis",
       });
@@ -24,9 +24,30 @@ router.post("/login", async (req, res) => {
     // Recherche de l'utilisateur par prénom
     const user = await prisma.users.findFirst({
       where: {
-        firstname: firstName.trim(),
+        firstname: firstname.trim(),
+      },
+      // chaque post, like ou comment contient aussi ses relations imbriquées :
+      include: {
+        posts: {
+          include: {
+            likes: true, // Facultatif : les likes du post
+            comments: true, // Facultatif : les commentaires du post
+          },
+        },
+        likes: {
+          include: {
+            posts: true,
+            users: true,
+          },
+        },
+        comments: {
+          include: {
+            posts: true, // Post associé à chaque commentaire
+          },
+        },
       },
     });
+    // console.log(user);
 
     if (!user) {
       return res.status(401).json({
@@ -43,13 +64,14 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Authentification réussie - retourner les données user (sans le mot de passe)
+    // Authentification réussie - retourner les données user dans sa page DASHBOARD (sans le mot de passe)
     const userResponse = {
       id: user.id,
-      firstName: user.firstname,
-      lastName: user.lastname,
+      firstname: user.firstname,
+      lastname: user.lastname,
       email: user.email,
-      // ajouter la photo
+      url_userpicture: user.url_userpicture,
+      posts: user.posts || [],
     };
 
     res.status(200).json({
