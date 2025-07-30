@@ -146,4 +146,28 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.get("/byHashtag/:hashtag", async (req, res) => {
+  const { hashtag } = req.params;
+  try {
+    const posts = await prisma.posts.findMany({
+      where: {
+        hashtag: hashtag,
+      },
+      include: {
+        comments: true,
+        likes: true,
+        users: true,
+      },
+    });
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des posts par hashtag :", error);
+    res.status(500).json({ error: "Erreur serveur." });
+  }
+});
+
+
+
+
+
 module.exports = router;
