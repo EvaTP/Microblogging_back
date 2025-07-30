@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
       include: {
         comments: true,
         likes: true,
+        users: true,
       },
     });
     res.json(posts);
