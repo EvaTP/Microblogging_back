@@ -9,7 +9,14 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   // Ajoutez ceci au début de votre route POST
   console.log("🔍 Tentative de connexion à la base de données...");
-  const { firstname, lastname, email, password, user_biography } = req.body;
+  const {
+    firstname,
+    lastname,
+    email,
+    password,
+    user_biography,
+    url_userpicture,
+  } = req.body;
 
   // Vérification des champs requis
   if (!firstname || !lastname || !email || !password) {
@@ -53,6 +60,8 @@ router.post("/", async (req, res) => {
         password: hashedPassword,
         user_biography: user_biography || "",
         status_id: userStatus.role,
+        url_userpicture:
+          url_userpicture || "http://localhost:3000/pictures/user_avatar.png",
       },
     });
 
