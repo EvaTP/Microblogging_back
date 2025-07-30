@@ -40,6 +40,7 @@ model posts {
   updated_at    DateTime?       @db.Date
   comments      comments[]
   likes         likes[]
+  users         users?          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
   posts_hastags posts_hastags[]
 }
 
@@ -71,5 +72,6 @@ model users {
   url_userpicture String?
   comments        comments[]
   likes           likes[]
+  posts           posts[]
   status          status[]
 }
