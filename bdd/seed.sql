@@ -55,6 +55,15 @@ INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, upda
   '2025-07-11'
 );
 
+INSERT INTO posts (description, url_pictures, user_id, hashtag, created_at, updated_at)
+VALUES (
+  'Le charme des voyages en train d’antan 🚂 Fenêtres grandes ouvertes sur les paysages, comme dans un autre temps.',
+  'https://cdn.pixabay.com/photo/2020/07/22/09/58/vintage-train-travel-old-5427091_600x400.jpg',
+  1,
+  '#train #slowtravel #vintage #exploration',
+  NOW(),
+  NOW()
+);
 
 
 INSERT INTO comments (comment, user_id, post_id) VALUES
@@ -114,3 +123,8 @@ ALTER TABLE posts
 ADD CONSTRAINT fk_user_id
 FOREIGN KEY (user_id)
 REFERENCES users(id);
+
+-- modifier url photo posts
+UPDATE posts
+SET url_pictures = 'https://images.pexels.com/photos/10549831/pexels-photo-10549831.jpeg'
+WHERE id = 26
